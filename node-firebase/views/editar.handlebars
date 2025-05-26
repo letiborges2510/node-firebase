@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Agendamento</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="/style.css"> <!-- Certifique-se de que esse caminho está correto -->
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Agendamento</h2>
+      <div class="step active">
+        <div class="text">
+          <div class="step-title">Cadastro</div>
+          <div class="step-desc">Realize seu cadastro para marcar o agendamento</div>
+        </div>
+      </div>
+      <div class="step active">
+        <div class="text">
+          <div class="step-title">Consulta</div>
+          <div class="step-desc">Consulte seus dados já cadastrados</div>
+          <br>
+          <a class="btn-consulta" href="/consulta">Consultar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Área do formulário -->
+    <div class="form-area">
+      <h3>Editar Agendamento</h3>
+      <p class="description">Atualize os dados do cliente.</p>
+
+      <form action="/editar/{{post.id}}" method="POST">
+        <div class="input-group mb-3 text-start">
+          <div class="w-100">
+            <label class="form-label" for="nome">Nome:</label>
+            <input type="text" name="nome" class="form-control styled-input" id="nome" value="{{post.nome}}">
+          </div>
+        </div>
+
+        <div class="input-group mb-3 text-start">
+          <div class="w-100">
+            <label class="form-label" for="telefone">Telefone:</label>
+            <input type="text" name="telefone" class="form-control styled-input" id="telefone" value="{{post.telefone}}">
+          </div>
+        </div>
+
+        <div class="input-group mb-3 text-start">
+          <div class="w-100">
+            <label class="form-label" for="origem">Origem:</label>
+            <select name="origem" class="form-control styled-input" id="origem">
+              <option value="celular" {{#if (eq post.origem "celular")}}selected{{/if}}>Celular</option>
+              <option value="whatsapp" {{#if (eq post.origem "whatsapp")}}selected{{/if}}>Whatsapp</option>
+              <option value="telefone_fixo" {{#if (eq post.origem "telefone_fixo")}}selected{{/if}}>Telefone Fixo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-group mb-3 text-start">
+          <div class="w-100">
+            <label class="form-label" for="data_contato">Data do Contato:</label>
+            <input type="date" name="data_contato" class="form-control styled-input" id="data_contato" value="{{post.data_contato}}">
+          </div>
+        </div>
+
+        <div class="input-group mb-3 text-start">
+          <div class="w-100">
+            <label class="form-label" for="observacao">Observação:</label>
+            <textarea name="observacao" class="form-control styled-input" id="observacao" style="height: 100px;">{{post.observacao}}</textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-next">Editar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

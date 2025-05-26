@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Consultar - Agendamento de Potenciais Clientes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="/consulta.css" rel="stylesheet">
+</head>
+<body>
+  <div class="main-container">
+    <div class="sidebar">
+      <h2>Agendamento</h2>
+      <div class="step active">
+        <div class="text">
+           <div class="step-title">Consulta</div>
+          <div class="step-desc">Consulte seus dados já cadastrados</div>
+        </div>
+      </div>
+      <div class="step active">
+        <div class="text">
+          <div class="step-title">Cadastro</div>
+          <div class="step-desc">Realize seu cadastro para marcar o agendamento</div>
+          <br>
+          <a class="btn-consulta" href="/">Cadastrar</a>
+        </div>
+      </div>
+    </div>
+    <div class="form-area">
+      <h3>Consultar Agendamentos</h3>
+      <p class="description">Clique em um usuário para visualizar os detalhes do agendamento.</p>
+      <div class="user-cards">
+        {{#each posts}}
+        <div class="user-card" onclick="toggleDetails('details-{{id}}')">
+          <div class="user-card-header">
+            <h4>{{nome}}</h4>
+          </div>
+          <div class="user-card-details" id="details-{{id}}">
+            <p><strong>Telefone:</strong> {{telefone}}</p>
+            <p><strong>Origem:</strong> {{origem}}</p>
+            <p><strong>Data de Contato:</strong> {{data_contato}}</p>
+            <p><strong>Observação:</strong> {{observacao}}</p>
+            <div class="actions">
+              <br>
+              <a href="/editar/{{id}}" class="btn-editar">Editar</a>
+              <a href="/excluir/{{id}}" class="btn-excluir">Excluir</a>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+        {{#unless posts.length}}
+        <p class="text-muted">Nenhum agendamento encontrado.</p>
+        {{/unless}}
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleDetails(id) {
+      const element = document.getElementById(id);
+      if (element.style.display === "none" || element.style.display === "") {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
